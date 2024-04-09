@@ -3,22 +3,19 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './schema/user.schema';
-import { RedisModule } from 'src/providers/redis/redis.module';
 import { JwtModule } from '@nestjs/jwt';
 
-
 @Module({
-  imports:[
-    RedisModule,
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema },
-  ]),
-  JwtModule.register({
-    global: true,
-    secret: 'BookStore',
-    signOptions: { expiresIn: '2hr' },
-  }),
+  imports: [
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    JwtModule.register({
+      global: true,
+      secret: 'BookStore',
+      signOptions: { expiresIn: '2hr' },
+    }),
+    MongooseModule.forRoot('mongodb://localhost:27017/hotel_management'),
   ],
   controllers: [UsersController],
-  providers: [UsersService]
+  providers: [UsersService],
 })
 export class UsersModule {}

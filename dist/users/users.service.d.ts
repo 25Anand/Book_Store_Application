@@ -25,11 +25,9 @@
 import { IUser } from "./interface/user.interface";
 import { Model } from "mongoose";
 import { CreateUserDto, LoginDto } from "./dto/user.dto";
-import { RedisService } from "src/providers/redis/redis.service";
 export declare class UsersService {
     private readonly userModel;
-    private readonly redisService;
-    constructor(userModel: Model<IUser>, redisService: RedisService);
+    constructor(userModel: Model<IUser>);
     createUser(createUserDto: CreateUserDto): Promise<any>;
     login(loginDto: LoginDto): Promise<any>;
     findUserByEmail(email: string): Promise<any>;

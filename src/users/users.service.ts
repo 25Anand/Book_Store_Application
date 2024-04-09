@@ -6,14 +6,12 @@ import { CreateUserDto, LoginDto } from "./dto/user.dto";
 import * as bcrypt from "bcrypt";
 import { LOGIN_MSG } from "src/constant/constant";
 import { sign,verify } from "jsonwebtoken";
-import { RedisService } from "src/providers/redis/redis.service";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel("User")
     private readonly userModel: Model<IUser>,
-    private readonly redisService: RedisService
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<any> {
@@ -61,11 +59,11 @@ export class UsersService {
         Token: userToken,
       };
 
-      await this.redisService.setUserSession(
-        `UserSession: ${userExists.email}`,
-        JSON.stringify(userSessionData),
-        86400
-      );
+      // await this.redisService.setUserSession(
+      //   `UserSession: ${userExists.email}`,
+      //   JSON.stringify(userSessionData),
+      //   86400
+      // );
 
       return userToken;
     } catch (error) {

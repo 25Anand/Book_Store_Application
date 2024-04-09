@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { PurchasesController } from './purchases.controller';
 import { PurchasesService } from './purchases.service';
-
+import { PurchaseBookController } from './purchases.controller';
+import { HttpResponse } from 'src/common/httpResponse';
+import { ConfigModule } from '@nestjs/config';
 @Module({
-  controllers: [PurchasesController],
-  providers: [PurchasesService]
+  imports: [ConfigModule.forRoot()],
+  controllers: [PurchaseBookController],
+  providers: [PurchasesService,HttpResponse]
 })
 export class PurchaseModule {}

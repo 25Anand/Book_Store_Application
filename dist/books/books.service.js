@@ -31,10 +31,8 @@ let BooksService = class BooksService {
             }
             console.log(bookTitle);
             const bookData = { ...createBookDto, title: bookTitle };
-            console.log(bookData);
             const newBook = new this.bookModel(bookData);
             const bookSaved = await newBook.save();
-            console.log(bookSaved);
             return bookSaved;
         }
         catch (error) {

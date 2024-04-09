@@ -12,7 +12,6 @@ const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_schema_1 = require("./schema/user.schema");
-const redis_module_1 = require("../providers/redis/redis.module");
 const jwt_1 = require("@nestjs/jwt");
 let UsersModule = class UsersModule {
 };
@@ -20,17 +19,16 @@ exports.UsersModule = UsersModule;
 exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            redis_module_1.RedisModule,
-            mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema },
-            ]),
+            mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }]),
             jwt_1.JwtModule.register({
                 global: true,
                 secret: 'BookStore',
                 signOptions: { expiresIn: '2hr' },
             }),
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/hotel_management'),
         ],
         controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService]
+        providers: [users_service_1.UsersService],
     })
 ], UsersModule);
 //# sourceMappingURL=users.module.js.map
