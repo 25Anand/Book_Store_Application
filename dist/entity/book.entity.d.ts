@@ -22,17 +22,11 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import mongoose, { Document } from "mongoose";
-export interface IBookDocument extends Document {
-    bookId: string;
-    authors: string[];
-    sellCount: number;
-    title: string;
-    description: string;
-    price: number;
+import { Model } from 'mongoose';
+import { IBookDocument } from 'src/books/schema/books.schema';
+import { Dao } from 'src/provider/database/dao.provider';
+export declare class BookEntity extends Dao {
+    private bookModel;
+    constructor(bookModel: Model<IBookDocument>);
+    findBookById(data: any): Promise<any>;
 }
-export declare const BookSchema: mongoose.Schema<IBookDocument, mongoose.Model<IBookDocument, any, any, any, mongoose.Document<unknown, any, IBookDocument> & IBookDocument & {
-    _id: mongoose.Types.ObjectId;
-}, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, IBookDocument, mongoose.Document<unknown, {}, mongoose.FlatRecord<IBookDocument>> & mongoose.FlatRecord<IBookDocument> & {
-    _id: mongoose.Types.ObjectId;
-}>;

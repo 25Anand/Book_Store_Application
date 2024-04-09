@@ -12,12 +12,13 @@ const purchases_service_1 = require("./purchases.service");
 const purchases_controller_1 = require("./purchases.controller");
 const httpResponse_1 = require("../common/httpResponse");
 const config_1 = require("@nestjs/config");
+const book_entity_1 = require("../entity/book.entity");
 let PurchaseModule = class PurchaseModule {
 };
 exports.PurchaseModule = PurchaseModule;
 exports.PurchaseModule = PurchaseModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot()],
+        imports: [config_1.ConfigModule.forRoot(), book_entity_1.BookEntity],
         controllers: [purchases_controller_1.PurchaseBookController],
         providers: [purchases_service_1.PurchasesService, httpResponse_1.HttpResponse]
     })

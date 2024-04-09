@@ -1,25 +1,27 @@
-import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from "mongoose";
+import { ENUM } from "src/common/enum";
 
-@Schema()
-export class Book extends Document {
-  @Prop({ required: true ,unique: true })
+export interface IBookDocument extends Document {
   bookId: string;
-
-  @Prop({ required: true,unique: true })
-  title: string;
-
-  @Prop({ type: [String], required: true })
   authors: string[];
-
-  @Prop({ required: true })
-  description: string;
-
-  @Prop({ required: true })
-  price: number;
-
-  @Prop({ default: 0 })
   sellCount: number;
+  title: string;
+  description: string;
+  price: number;
 }
 
-export const BookSchema = SchemaFactory.createForClass(Book);
+export const BookSchema = new mongoose.Schema<IBookDocument>(
+  {
+    bookId: { type: String, required: true },
+    authors: [{ type: String, required: true }],
+    sellCount: { type: Number, required: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+  },
+  {
+    versionKey: false,
+    timestamps: true,
+    collection: ENUM.COLLECTIONS.BOOK,
+  }
+);

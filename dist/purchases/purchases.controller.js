@@ -18,6 +18,7 @@ const purchase_dto_1 = require("./dto/purchase.dto");
 const response_1 = require("../common/response");
 const httpResponse_1 = require("../common/httpResponse");
 const purchases_service_1 = require("./purchases.service");
+const auth_guard_1 = require("../guard/auth.guard");
 let PurchaseBookController = class PurchaseBookController {
     constructor(httpResponse, purchaseService) {
         this.httpResponse = httpResponse;
@@ -32,6 +33,11 @@ let PurchaseBookController = class PurchaseBookController {
             console.error("error in login ", error);
         }
     }
+    async getHistoryOfBook(response, request) {
+        const userData = request.user;
+        const history = await this.purchaseService.viewHistory(userData);
+        return this.httpResponse.sendResponse(response, response_1.RESPONSE_DATA.SUCCESS, history);
+    }
 };
 exports.PurchaseBookController = PurchaseBookController;
 __decorate([
@@ -42,6 +48,15 @@ __decorate([
     __metadata("design:paramtypes", [purchase_dto_1.PurchaseBookDto, Response]),
     __metadata("design:returntype", Promise)
 ], PurchaseBookController.prototype, "purchase", null);
+__decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, common_1.Get)('/history'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Response, Object]),
+    __metadata("design:returntype", Promise)
+], PurchaseBookController.prototype, "getHistoryOfBook", null);
 exports.PurchaseBookController = PurchaseBookController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [httpResponse_1.HttpResponse, purchases_service_1.PurchasesService])

@@ -1,8 +1,9 @@
-  import { Body, Controller, Post, Res } from "@nestjs/common";
+  import { Body, Controller, Get, HttpStatus, Post, Req, Res, UseGuards } from "@nestjs/common";
   import { PurchaseBookDto } from "./dto/purchase.dto";
   import { RESPONSE_DATA } from "src/common/response";
   import { HttpResponse } from "src/common/httpResponse";
   import { PurchasesService } from "./purchases.service";
+import { AuthGuard } from "src/guard/auth.guard";
 
   @Controller()
   export class PurchaseBookController{
@@ -23,4 +24,16 @@
         console.error("error in login ",error)
       }
     }
+    /**
+     * @author Book_Store
+     * @description This function will used to fetch the history of book
+    */
+   @UseGuards(AuthGuard)
+   @Get('/history')
+   async getHistoryOfBook(@Res() response: Response, @Req() request) {
+    const userData=request.user;
+      const history = await this.purchaseService.viewHistory(userData);
+      return this.httpResponse.sendResponse(response, RESPONSE_DATA.SUCCESS,history);
+  
+   }
   }

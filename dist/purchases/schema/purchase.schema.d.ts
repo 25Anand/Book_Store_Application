@@ -23,14 +23,14 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Document, Types } from 'mongoose';
-interface purchase extends Document {
+export interface PurchaseHistory extends Document {
     purchaseId: string;
     bookId: Types.ObjectId;
     userId: Types.ObjectId;
     purchaseDate: Date;
     price: number;
+    chargeId: string;
 }
-export declare const PurchaseHistoryModel: import("mongoose").Model<purchase, {}, {}, {}, Document<unknown, {}, purchase> & purchase & {
+export declare const PurchaseHistoryModel: import("mongoose").Model<PurchaseHistory, {}, {}, {}, Document<unknown, {}, PurchaseHistory> & PurchaseHistory & {
     _id: Types.ObjectId;
 }, any>;
-export {};

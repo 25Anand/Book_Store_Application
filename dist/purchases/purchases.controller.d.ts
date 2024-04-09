@@ -6,4 +6,5 @@ export declare class PurchaseBookController {
     private readonly purchaseService;
     constructor(httpResponse: HttpResponse, purchaseService: PurchasesService);
     purchase(purchaseBookDto: PurchaseBookDto, response: Response): Promise<void>;
+    getHistoryOfBook(response: Response, request: any): Promise<void>;
 }
