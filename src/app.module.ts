@@ -10,6 +10,7 @@ import configuration from './config/configuration';
 import { AllExceptionsFilter } from './filters/exceptionFilter';
 import { APP_FILTER } from '@nestjs/core/constants';
 import { DatabaseModule } from './provider/database/db.module';
+import { revenueController } from 'revenue/revenue.controller';
 
 dotenv.config();
 

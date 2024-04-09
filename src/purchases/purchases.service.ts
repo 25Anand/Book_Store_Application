@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { PurchaseBookDto } from './dto/purchase.dto';
-import { BookEntity } from 'src/entity/book.entity';
 import { PurchaseHistory, PurchaseHistoryModel } from './schema/purchase.schema';
+import { IBookDocument } from 'src/books/schema/books.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class PurchasesService {
-   constructor(private readonly bookentity:BookEntity) {}
-   async purchaseBook(data:PurchaseBookDto):Promise<PurchaseHistory>{
+  constructor(@InjectModel('Book') private readonly bookSchema: Model<IBookDocument>) {}
+  async purchaseBook(data:any):Promise<PurchaseHistory>{
       try {
-         const book = await this.bookentity.findBookById(data.bookId);
+         const book = await this.bookSchema.findOne(data.bookId);
          if (!book) {
            throw new Error("Book not found.");
          }
@@ -24,7 +25,7 @@ export class PurchasesService {
          //   chargeId: paymentIntent.id,
          });
          const savedPurchase = await purchase.save();
-         await this.bookentity.updateOne(
+         await this.bookSchema.updateOne(
            { _id: data.bookId },
            { $inc: { sellCount: 1 } }
          );
