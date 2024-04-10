@@ -10,7 +10,10 @@ import configuration from './config/configuration';
 import { AllExceptionsFilter } from './filters/exceptionFilter';
 import { APP_FILTER } from '@nestjs/core/constants';
 import { DatabaseModule } from './provider/database/db.module';
-import { revenueController } from 'revenue/revenue.controller';
+import { RevenueCalculationService } from 'src/revenue/revenue.controller';
+import { StripeModule } from './utils/stripe/stripe.module';
+import { RabbitMQModule } from './utils/rabbitMQ/rabbitMQ.module';
+import { RevenueCalculationModule } from './revenue/revenue.module';
 
 dotenv.config();
 
@@ -21,6 +24,9 @@ dotenv.config();
     DatabaseModule,
     BookModule,
     ReviewModule,
+    StripeModule,
+    RabbitMQModule,
+    RevenueCalculationModule,
     PurchaseModule,
     ],
 })

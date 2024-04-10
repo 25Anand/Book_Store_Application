@@ -1,15 +1,15 @@
-import { Document, Schema, model, Types } from 'mongoose';
+import mongoose, { Document, Schema, model, Types } from 'mongoose';
 export interface PurchaseHistory extends Document {
   purchaseId: string;
   bookId: Types.ObjectId;
   userId: Types.ObjectId;
   purchaseDate: Date;
   price: number;
-  // cardType: string;
+  cardType: string;
   chargeId: string;
 }
 
-const purchaseHistorySchema = new Schema<PurchaseHistory>({
+export const purchaseHistorySchema = new mongoose.Schema<PurchaseHistory>({
   purchaseId: { type: String, unique: true, required: false },
   bookId: {
     type: Schema.Types.ObjectId,
@@ -23,7 +23,7 @@ const purchaseHistorySchema = new Schema<PurchaseHistory>({
   },
   purchaseDate: { type: Date, required: true },
   price: { type: Number, required: true },
-  // cardType: { type: String, required: true },
+  cardType: { type: String, required: true },
   chargeId: { type: String, required: false } 
 });
 
@@ -54,4 +54,4 @@ purchaseHistorySchema.pre<PurchaseHistory>('save', async function (next) {
     }
   });
 
-export const PurchaseHistoryModel = model<PurchaseHistory>('PurchaseHistory', purchaseHistorySchema);
+export const PurchaseHistoryModel = mongoose.model<PurchaseHistory>('PurchaseHistory', purchaseHistorySchema);

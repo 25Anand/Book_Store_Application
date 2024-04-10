@@ -22,13 +22,16 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Response } from "express";
-import { Model } from "mongoose";
-import { IBookDocument } from "src/books/schema/books.schema";
-declare class calculate_revenue {
-    private readonly bookSchema;
-    constructor(bookSchema: Model<IBookDocument>);
-    revenue(res: Response): Promise<Response<any, Record<string, any>>>;
+import { Model } from 'mongoose';
+import { PurchaseHistory } from 'src/purchases/schema/purchase.schema';
+import { IBookDocument } from 'src/books/schema/books.schema';
+import { MailService } from 'src/nodeMailer/nodeMailer';
+import { Response } from 'express';
+export declare class RevenueCalculationService {
+    private readonly purchaseHistoryModel;
+    private readonly bookModel;
+    private readonly mailService;
+    static calculateRevenue(response: Response<any, Record<string, any>>): void;
+    constructor(purchaseHistoryModel: Model<PurchaseHistory>, bookModel: Model<IBookDocument>, mailService: MailService);
+    calculateRevenue(): Promise<Map<string, number>>;
 }
-export declare const revenueController: calculate_revenue;
-export {};

@@ -5,7 +5,7 @@
   import { PurchasesService } from "./purchases.service";
 import { AuthGuard } from "src/guard/auth.guard";
 
-  @Controller()
+  @Controller('purchase')
   export class PurchaseBookController{
       constructor(private readonly httpResponse:HttpResponse,private readonly purchaseService:PurchasesService){}
 
@@ -14,10 +14,12 @@ import { AuthGuard } from "src/guard/auth.guard";
      * @description This function will used to purchase the bbok
      * @Body PurchaseBookDto
      */
-    @Post('/purchase')
-    async purchase(@Body() purchaseBookDto: PurchaseBookDto, @Res() response: Response) {
+    @UseGuards(AuthGuard)
+    @Post('purchaseBook')
+    async purchase(@Req() request,@Body() purchaseBookDto: PurchaseBookDto, @Res() response: Response) {
       try{
-        const result= await this.purchaseService.purchaseBook(purchaseBookDto);
+        const userData = request.user;
+        const result= await this.purchaseService.purchaseBook(userData,purchaseBookDto);
         return this.httpResponse.sendResponse(response, RESPONSE_DATA.SUCCESS,result);
       }
       catch(error){

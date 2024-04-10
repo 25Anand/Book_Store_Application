@@ -5,12 +5,13 @@ import { IBook } from "./interface/books.interface";
 import { Model } from "mongoose";
 import slugify from "slugify";
 import { InjectModel } from "@nestjs/mongoose";
+import { IBookDocument } from "./schema/books.schema";
 
 @Injectable()
 export class BooksService {
   constructor(
-    @InjectModel("Book")
-    private readonly bookModel: Model<IBook>
+    @InjectModel("Books")
+    private readonly bookModel: Model<IBookDocument>
   ) {}
   async addBook(userData, createBookDto: CreateBookDto): Promise<any> {
     try {
@@ -24,7 +25,8 @@ export class BooksService {
 
       const newBook = new this.bookModel(bookData);
       const bookSaved = await newBook.save();
-
+      console.log(bookSaved);
+      
       return bookSaved;
     } catch (error) {
       throw error;

@@ -12,52 +12,62 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.revenueController = void 0;
-const purchase_schema_1 = require("../src/purchases/schema/purchase.schema");
+exports.RevenueCalculationService = void 0;
+const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const books_schema_1 = require("../src/books/schema/books.schema");
-let calculate_revenue = class calculate_revenue {
-    constructor(bookSchema) {
-        this.bookSchema = bookSchema;
+const nodeMailer_1 = require("../nodeMailer/nodeMailer");
+let RevenueCalculationService = class RevenueCalculationService {
+    static calculateRevenue(response) {
+        throw new Error('Method not implemented.');
     }
-    async revenue(res) {
-        const purchase_history = await purchase_schema_1.PurchaseHistoryModel.find();
+    constructor(purchaseHistoryModel, bookModel, mailService) {
+        this.purchaseHistoryModel = purchaseHistoryModel;
+        this.bookModel = bookModel;
+        this.mailService = mailService;
+    }
+    async calculateRevenue() {
+        const purchaseHistory = await this.purchaseHistoryModel.find();
         const groupedPurchaseHistory = new Map();
-        for (const purchase of purchase_history) {
+        for (const purchase of purchaseHistory) {
             const bookId = purchase.bookId.toString();
             if (!groupedPurchaseHistory.has(bookId)) {
                 groupedPurchaseHistory.set(bookId, []);
             }
             groupedPurchaseHistory.get(bookId)?.push(purchase);
         }
-        const revenueByUser = new Map();
+        const revenueByAuthor = new Map();
         for (const [bookId, purchases] of groupedPurchaseHistory.entries()) {
-            const book = await this.bookSchema.findById(bookId);
+            const book = await this.bookModel.findById(bookId);
             if (book) {
                 const authors = book.authors;
                 const price = book.price;
                 const totalRevenueForBook = price * purchases.length;
                 for (const author of authors) {
-                    if (!revenueByUser.has(author)) {
-                        revenueByUser.set(author, 0);
+                    if (!revenueByAuthor.has(author)) {
+                        revenueByAuthor.set(author, 0);
                     }
-                    revenueByUser.set(author, revenueByUser.get(author) + totalRevenueForBook);
+                    revenueByAuthor.set(author, revenueByAuthor.get(author) + totalRevenueForBook);
                 }
             }
         }
-        for (const [author, revenue] of revenueByUser.entries()) {
-            const authorDetails = await this.bookSchema.findOne({ userType: 'Author', username: author });
+        for (const [author, revenue] of revenueByAuthor.entries()) {
+            const authorDetails = await this.bookModel.findOne({ userType: 'Author', username: author });
             if (authorDetails) {
                 const authorEmail = authorDetails.email;
+                this.mailService.sendmailtoauthor(authorEmail, author, revenue);
             }
         }
-        return res.status(200).json(Array.from(revenueByUser.entries()));
+        return revenueByAuthor;
     }
 };
-calculate_revenue = __decorate([
-    __param(0, (0, mongoose_1.InjectModel)('Book')),
-    __metadata("design:paramtypes", [mongoose_2.Model])
-], calculate_revenue);
-exports.revenueController = new calculate_revenue(books_schema_1.Book);
+exports.RevenueCalculationService = RevenueCalculationService;
+exports.RevenueCalculationService = RevenueCalculationService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)('PurchaseHistory')),
+    __param(1, (0, mongoose_1.InjectModel)('Book')),
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model,
+        nodeMailer_1.MailService])
+], RevenueCalculationService);
 //# sourceMappingURL=revenue.controller.js.map

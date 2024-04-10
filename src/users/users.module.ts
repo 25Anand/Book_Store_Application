@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from './schema/user.schema';
+import { UserModel, UserSchema } from './schema/user.schema';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
@@ -13,9 +13,10 @@ import { JwtModule } from '@nestjs/jwt';
       secret: 'BookStore',
       signOptions: { expiresIn: '2hr' },
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/hotel_management'),
+    // MongooseModule.forRoot('mongodb://localhost:27017/Book_Store_Application'),
   ],
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService,UserModel],
+  exports:[]
 })
 export class UsersModule {}
