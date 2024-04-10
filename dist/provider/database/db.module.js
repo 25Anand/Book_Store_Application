@@ -14,7 +14,6 @@ let DatabaseModule = class DatabaseModule {
 exports.DatabaseModule = DatabaseModule;
 exports.DatabaseModule = DatabaseModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
         providers: [...db_provider_1.databaseProviders],
         exports: [...db_provider_1.databaseProviders],
     })

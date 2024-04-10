@@ -12,12 +12,10 @@ const mongoose_1 = require("@nestjs/mongoose");
 const purchase_schema_1 = require("../purchases/schema/purchase.schema");
 const books_schema_1 = require("../books/schema/books.schema");
 const nodeMailer_1 = require("../nodeMailer/nodeMailer");
-const revenue_controller_1 = require("./revenue.controller");
-const cron_1 = require("./node_cron/cron");
+const revenue_service_1 = require("./revenue.service");
 const schedule_1 = require("@nestjs/schedule");
 const book_module_1 = require("../books/book.module");
 const users_module_1 = require("../users/users.module");
-const cron_module_1 = require("./node_cron/cron.module");
 let RevenueCalculationModule = class RevenueCalculationModule {
 };
 exports.RevenueCalculationModule = RevenueCalculationModule;
@@ -31,10 +29,8 @@ exports.RevenueCalculationModule = RevenueCalculationModule = __decorate([
             book_module_1.BookModule,
             users_module_1.UsersModule,
             schedule_1.ScheduleModule.forRoot(),
-            cron_module_1.CronModule
         ],
-        controllers: [revenue_controller_1.RevenueCalculationService],
-        providers: [nodeMailer_1.MailService, cron_1.CronService],
+        providers: [nodeMailer_1.MailService, revenue_service_1.RevenueCalculationService],
     })
 ], RevenueCalculationModule);
 //# sourceMappingURL=revenue.module.js.map

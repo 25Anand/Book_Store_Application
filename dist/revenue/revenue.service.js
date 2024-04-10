@@ -70,4 +70,4 @@ exports.RevenueCalculationService = RevenueCalculationService = __decorate([
         mongoose_2.Model,
         nodeMailer_1.MailService])
 ], RevenueCalculationService);
-//# sourceMappingURL=revenue.controller.js.map
+//# sourceMappingURL=revenue.service.js.map

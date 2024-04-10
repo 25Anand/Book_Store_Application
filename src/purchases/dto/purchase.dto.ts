@@ -1,13 +1,14 @@
 import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class PurchaseBookDto {
     @IsNotEmpty()
     @IsString()
-    bookId: string;
+    readonly bookId: Types.ObjectId;
   
     @IsString()
     @IsNotEmpty()
-    userId: string;
+    readonly userId: Types.ObjectId;
   
    @IsNumber()
    @IsNotEmpty()

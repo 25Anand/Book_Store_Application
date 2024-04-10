@@ -22,7 +22,7 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import mongoose, { Document, Types } from "mongoose";
+import mongoose, { Document } from "mongoose";
 export interface IBookDocument extends Document {
     bookId: string;
     email: string;
@@ -33,10 +33,10 @@ export interface IBookDocument extends Document {
     price: number;
 }
 export declare const BookSchema: mongoose.Schema<IBookDocument, mongoose.Model<IBookDocument, any, any, any, mongoose.Document<unknown, any, IBookDocument> & IBookDocument & {
-    _id: Types.ObjectId;
+    _id: mongoose.Types.ObjectId;
 }, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, IBookDocument, mongoose.Document<unknown, {}, mongoose.FlatRecord<IBookDocument>> & mongoose.FlatRecord<IBookDocument> & {
-    _id: Types.ObjectId;
+    _id: mongoose.Types.ObjectId;
 }>;
-export declare const BookModel: mongoose.Model<IBookDocument, {}, {}, {}, mongoose.Document<unknown, {}, IBookDocument> & IBookDocument & {
-    _id: Types.ObjectId;
+export declare const Book: mongoose.Model<IBookDocument, {}, {}, {}, mongoose.Document<unknown, {}, IBookDocument> & IBookDocument & {
+    _id: mongoose.Types.ObjectId;
 }, any>;

@@ -25,10 +25,10 @@ exports.UsersModule = UsersModule = __decorate([
                 secret: 'BookStore',
                 signOptions: { expiresIn: '2hr' },
             }),
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/hotel_management'),
         ],
         controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService, user_schema_1.UserModel],
-        exports: []
+        providers: [users_service_1.UsersService],
     })
 ], UsersModule);
 //# sourceMappingURL=users.module.js.map

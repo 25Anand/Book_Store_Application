@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PurchaseHistoryModel = exports.purchaseHistorySchema = void 0;
 const mongoose_1 = require("mongoose");
-exports.purchaseHistorySchema = new mongoose_1.default.Schema({
+exports.purchaseHistorySchema = new mongoose_1.Schema({
     purchaseId: { type: String, unique: true, required: false },
     bookId: {
         type: mongoose_1.Schema.Types.ObjectId,
@@ -16,7 +16,7 @@ exports.purchaseHistorySchema = new mongoose_1.default.Schema({
     },
     purchaseDate: { type: Date, required: true },
     price: { type: Number, required: true },
-    cardType: { type: String, required: true },
+    cardType: { type: String, required: false },
     chargeId: { type: String, required: false }
 });
 exports.purchaseHistorySchema.pre('save', async function (next) {
@@ -42,5 +42,5 @@ exports.purchaseHistorySchema.pre('save', async function (next) {
         throw error;
     }
 });
-exports.PurchaseHistoryModel = mongoose_1.default.model('PurchaseHistory', exports.purchaseHistorySchema);
+exports.PurchaseHistoryModel = (0, mongoose_1.model)('PurchaseHistory', exports.purchaseHistorySchema);
 //# sourceMappingURL=purchase.schema.js.map

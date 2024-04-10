@@ -24,10 +24,9 @@ let PurchaseBookController = class PurchaseBookController {
         this.httpResponse = httpResponse;
         this.purchaseService = purchaseService;
     }
-    async purchase(request, purchaseBookDto, response) {
+    async purchase(purchaseBookDto, response) {
         try {
-            const userData = request.user;
-            const result = await this.purchaseService.purchaseBook(userData, purchaseBookDto);
+            const result = await this.purchaseService.purchaseBook(purchaseBookDto);
             return this.httpResponse.sendResponse(response, response_1.RESPONSE_DATA.SUCCESS, result);
         }
         catch (error) {
@@ -43,12 +42,11 @@ let PurchaseBookController = class PurchaseBookController {
 exports.PurchaseBookController = PurchaseBookController;
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    (0, common_1.Post)('purchaseBook'),
-    __param(0, (0, common_1.Req)()),
-    __param(1, (0, common_1.Body)()),
-    __param(2, (0, common_1.Res)()),
+    (0, common_1.Post)('/purchase'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, purchase_dto_1.PurchaseBookDto, Response]),
+    __metadata("design:paramtypes", [purchase_dto_1.PurchaseBookDto, Response]),
     __metadata("design:returntype", Promise)
 ], PurchaseBookController.prototype, "purchase", null);
 __decorate([
@@ -61,7 +59,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PurchaseBookController.prototype, "getHistoryOfBook", null);
 exports.PurchaseBookController = PurchaseBookController = __decorate([
-    (0, common_1.Controller)('purchase'),
+    (0, common_1.Controller)(),
     __metadata("design:paramtypes", [httpResponse_1.HttpResponse, purchases_service_1.PurchasesService])
 ], PurchaseBookController);
 //# sourceMappingURL=purchases.controller.js.map

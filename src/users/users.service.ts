@@ -59,12 +59,6 @@ export class UsersService {
         Token: userToken,
       };
 
-      // await this.redisService.setUserSession(
-      //   `UserSession: ${userExists.email}`,
-      //   JSON.stringify(userSessionData),
-      //   86400
-      // );
-
       return userToken;
     } catch (error) {
       throw error;

@@ -23,11 +23,11 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { CreateBookDto } from "./dto/books.dto";
+import { IBook } from "./interface/books.interface";
 import { Model } from "mongoose";
-import { IBookDocument } from "./schema/books.schema";
 export declare class BooksService {
     private readonly bookModel;
-    constructor(bookModel: Model<IBookDocument>);
+    constructor(bookModel: Model<IBook>);
     addBook(userData: any, createBookDto: CreateBookDto): Promise<any>;
     findBook(bookId: any): Promise<any>;
 }

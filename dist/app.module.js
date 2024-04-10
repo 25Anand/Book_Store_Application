@@ -16,8 +16,6 @@ const review_rate_module_1 = require("./review&rate/review&rate.module");
 const purchase_module_1 = require("./purchases/purchase.module");
 const configuration_1 = require("./config/configuration");
 const db_module_1 = require("./provider/database/db.module");
-const stripe_module_1 = require("./utils/stripe/stripe.module");
-const rabbitMQ_module_1 = require("./utils/rabbitMQ/rabbitMQ.module");
 const revenue_module_1 = require("./revenue/revenue.module");
 dotenv.config();
 let AppModule = class AppModule {
@@ -31,10 +29,8 @@ exports.AppModule = AppModule = __decorate([
             db_module_1.DatabaseModule,
             book_module_1.BookModule,
             review_rate_module_1.ReviewModule,
-            stripe_module_1.StripeModule,
-            rabbitMQ_module_1.RabbitMQModule,
-            revenue_module_1.RevenueCalculationModule,
             purchase_module_1.PurchaseModule,
+            revenue_module_1.RevenueCalculationModule
         ],
     })
 ], AppModule);

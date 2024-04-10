@@ -22,7 +22,7 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import mongoose, { Document, Types } from 'mongoose';
+import { Document, Schema, Types } from 'mongoose';
 export interface PurchaseHistory extends Document {
     purchaseId: string;
     bookId: Types.ObjectId;
@@ -32,11 +32,11 @@ export interface PurchaseHistory extends Document {
     cardType: string;
     chargeId: string;
 }
-export declare const purchaseHistorySchema: mongoose.Schema<PurchaseHistory, mongoose.Model<PurchaseHistory, any, any, any, mongoose.Document<unknown, any, PurchaseHistory> & PurchaseHistory & {
+export declare const purchaseHistorySchema: Schema<PurchaseHistory, import("mongoose").Model<PurchaseHistory, any, any, any, Document<unknown, any, PurchaseHistory> & PurchaseHistory & {
     _id: Types.ObjectId;
-}, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, PurchaseHistory, mongoose.Document<unknown, {}, mongoose.FlatRecord<PurchaseHistory>> & mongoose.FlatRecord<PurchaseHistory> & {
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, PurchaseHistory, Document<unknown, {}, import("mongoose").FlatRecord<PurchaseHistory>> & import("mongoose").FlatRecord<PurchaseHistory> & {
     _id: Types.ObjectId;
 }>;
-export declare const PurchaseHistoryModel: mongoose.Model<PurchaseHistory, {}, {}, {}, mongoose.Document<unknown, {}, PurchaseHistory> & PurchaseHistory & {
+export declare const PurchaseHistoryModel: import("mongoose").Model<PurchaseHistory, {}, {}, {}, Document<unknown, {}, PurchaseHistory> & PurchaseHistory & {
     _id: Types.ObjectId;
 }, any>;

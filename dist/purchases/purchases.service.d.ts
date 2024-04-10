@@ -22,19 +22,16 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { PurchaseHistory } from './schema/purchase.schema';
-import { IBookDocument } from 'src/books/schema/books.schema';
-import { Model } from 'mongoose';
-import { StripeService } from 'src/utils/stripe/stripe.service';
-import { ProducerService } from 'src/utils/rabbitMQ/producer/producer';
+import { PurchaseHistory } from "./schema/purchase.schema";
+import { IBookDocument } from "src/books/schema/books.schema";
+import { Model } from "mongoose";
+import { StripeService } from "src/utils/stripe/stripe.service";
 export declare class PurchasesService {
     private readonly bookSchema;
-    private readonly purchaseHistorySchema;
     private stripeService;
-    private producerService;
-    constructor(bookSchema: Model<IBookDocument>, purchaseHistorySchema: Model<PurchaseHistory>, stripeService: StripeService, producerService: ProducerService);
-    purchaseBook(userData: any, data: any): Promise<PurchaseHistory>;
-    viewHistory(data: any): Promise<import("mongoose").Document<unknown, {}, PurchaseHistory> & PurchaseHistory & {
+    constructor(bookSchema: Model<IBookDocument>, stripeService: StripeService);
+    purchaseBook(data: any): Promise<PurchaseHistory>;
+    viewHistory(token: any): Promise<(import("mongoose").Document<unknown, {}, PurchaseHistory> & PurchaseHistory & {
         _id: import("mongoose").Types.ObjectId;
-    }>;
+    })[]>;
 }

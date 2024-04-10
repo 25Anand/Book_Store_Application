@@ -18,11 +18,11 @@ exports.BookModule = BookModule;
 exports.BookModule = BookModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forFeature([{ name: 'Books', schema: books_schema_1.BookSchema },
+            mongoose_1.MongooseModule.forFeature([{ name: 'Book', schema: books_schema_1.BookSchema },
             ])
         ],
         controllers: [book_controller_1.BookController],
-        providers: [books_service_1.BooksService, books_schema_1.BookModel],
+        providers: [books_service_1.BooksService],
         exports: [mongoose_1.MongooseModule]
     })
 ], BookModule);

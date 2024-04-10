@@ -14,18 +14,12 @@ const httpResponse_1 = require("../common/httpResponse");
 const config_1 = require("@nestjs/config");
 const book_module_1 = require("../books/book.module");
 const stripe_module_1 = require("../utils/stripe/stripe.module");
-const rabbitMQ_module_1 = require("../utils/rabbitMQ/rabbitMQ.module");
-const db_module_1 = require("../provider/database/db.module");
-const mongoose_1 = require("@nestjs/mongoose");
-const purchase_schema_1 = require("./schema/purchase.schema");
 let PurchaseModule = class PurchaseModule {
 };
 exports.PurchaseModule = PurchaseModule;
 exports.PurchaseModule = PurchaseModule = __decorate([
     (0, common_1.Module)({
-        imports: [stripe_module_1.StripeModule, config_1.ConfigModule.forRoot(), book_module_1.BookModule, stripe_module_1.StripeModule, rabbitMQ_module_1.RabbitMQModule, db_module_1.DatabaseModule,
-            mongoose_1.MongooseModule.forFeature([{ name: 'PurchaseHistory', schema: purchase_schema_1.purchaseHistorySchema }]),
-        ],
+        imports: [config_1.ConfigModule.forRoot(), book_module_1.BookModule, stripe_module_1.StripeModule],
         controllers: [purchases_controller_1.PurchaseBookController],
         providers: [purchases_service_1.PurchasesService, httpResponse_1.HttpResponse]
     })

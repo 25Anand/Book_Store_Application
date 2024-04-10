@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 // import { RevenueCalculationService } from '.';
-import { purchaseHistorySchema } from 'src/purchases/schema/purchase.schema';
+import { purchaseHistorySchema } from '../purchases/schema/purchase.schema';
 import { BookSchema } from 'src/books/schema/books.schema';
 import { MailService } from 'src/nodeMailer/nodeMailer';
-import { RevenueCalculationService } from './revenue.controller';
-import { CronService } from './node_cron/cron';
+import { RevenueCalculationService } from './revenue.service';
+import { CronService } from '../nodeCron/cron';
 import { ScheduleModule } from '@nestjs/schedule';
 import { BookModule } from 'src/books/book.module';
 import { UsersModule } from 'src/users/users.module';
-import { CronModule } from './node_cron/cron.module';
 
 @Module({
   imports: [
@@ -19,10 +18,10 @@ import { CronModule } from './node_cron/cron.module';
     ]),
     BookModule, 
     UsersModule,
+
     ScheduleModule.forRoot(),
-    CronModule
   ],
-  controllers:[RevenueCalculationService],
-  providers: [MailService,CronService],
+//   controllers:[RevenueCalculationService,],
+  providers: [MailService,RevenueCalculationService],
 })
 export class RevenueCalculationModule {}

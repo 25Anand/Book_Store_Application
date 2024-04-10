@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, model, Types } from 'mongoose';
+import { Document, Schema, model, Types } from 'mongoose';
 export interface PurchaseHistory extends Document {
   purchaseId: string;
   bookId: Types.ObjectId;
@@ -9,7 +9,7 @@ export interface PurchaseHistory extends Document {
   chargeId: string;
 }
 
-export const purchaseHistorySchema = new mongoose.Schema<PurchaseHistory>({
+export const purchaseHistorySchema = new Schema<PurchaseHistory>({
   purchaseId: { type: String, unique: true, required: false },
   bookId: {
     type: Schema.Types.ObjectId,
@@ -23,7 +23,7 @@ export const purchaseHistorySchema = new mongoose.Schema<PurchaseHistory>({
   },
   purchaseDate: { type: Date, required: true },
   price: { type: Number, required: true },
-  cardType: { type: String, required: true },
+  cardType: { type: String, required: false },
   chargeId: { type: String, required: false } 
 });
 
@@ -54,4 +54,4 @@ purchaseHistorySchema.pre<PurchaseHistory>('save', async function (next) {
     }
   });
 
-export const PurchaseHistoryModel = mongoose.model<PurchaseHistory>('PurchaseHistory', purchaseHistorySchema);
+export const PurchaseHistoryModel = model<PurchaseHistory>('PurchaseHistory', purchaseHistorySchema);

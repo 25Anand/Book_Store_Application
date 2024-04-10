@@ -1,4 +1,4 @@
-import mongoose, { Document, Types } from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { ENUM } from "src/common/enum";
 
 export interface IBookDocument extends Document {
@@ -28,4 +28,4 @@ export const BookSchema = new mongoose.Schema<IBookDocument>(
   }
 );
 
-export const BookModel = mongoose.model<IBookDocument>("Books", BookSchema);
+export const Book = mongoose.model<IBookDocument>("Book", BookSchema);

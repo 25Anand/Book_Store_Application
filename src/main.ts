@@ -6,10 +6,10 @@ import { ConfigService } from '@nestjs/config';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { CONSTANT } from './common/constant';
+import { consumePurchaseNotifications } from './utils/rabbitMQ/consumer';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // Starts listening for shutdown hooks
   app.enableShutdownHooks();
   app.use(
     express.json({
@@ -27,6 +27,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port: number = configService.get<number>('PORT')
   console.log('Port number is: ', port);
+  consumePurchaseNotifications();
   await app.listen(port);
 }
 bootstrap();

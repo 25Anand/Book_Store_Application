@@ -1,6 +1,6 @@
 
 export const ENUM = {
     COLLECTIONS: {
-      BOOK: 'Books'
+      BOOK: 'book'
     }
 }

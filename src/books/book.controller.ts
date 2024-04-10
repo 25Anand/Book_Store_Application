@@ -18,6 +18,8 @@ import { RESPONSE_MSG } from "src/constant/constant";
 export class BookController {
   constructor(private readonly booksService: BooksService) {}
 
+  /* The code snippet you provided is defining a POST endpoint `/newBook` in the `BookController` class
+  of a NestJS application. Here's a breakdown of what the code is doing: */
   @UseGuards(AuthGuard)
   @Post("newBook")
   async addNewBook(
@@ -38,7 +40,16 @@ export class BookController {
     }
   }
 
-  @Get(":bookId")
+  /**
+   * 
+   * @param bookId 
+   * @param response 
+   * @returns 
+   */
+  @/* This code snippet defines a GET endpoint in the `BookController` class of a NestJS application.
+  The endpoint is designed to retrieve a specific book by its `bookId`. Here's a breakdown of what
+  the code is doing: */
+  Get(":bookId")
   async findOneById(
     @Param("bookId") bookId: string,
     @Res() response

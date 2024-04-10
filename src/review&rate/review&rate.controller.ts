@@ -13,10 +13,16 @@ import { RatingService } from "./review&rate.service";
 export class RatingController {
   constructor(private readonly ratingService: RatingService) {}
 
+  /**
+   * 
+   * @param reviewData 
+   * @param response 
+   * @returns 
+    * @description This function will used to write the review about the bbok
+  */
   @Post(":id/review")
   async addReview(
     @Body() reviewData: any,
-    // @Param("id") bookId: string,
     @Res() response
   ) {
     try {
@@ -32,6 +38,7 @@ export class RatingController {
       });
     } catch (error) {
       throw error;
+      
     }
   }
 }

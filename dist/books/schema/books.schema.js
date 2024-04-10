@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookModel = exports.BookSchema = void 0;
+exports.Book = exports.BookSchema = void 0;
 const mongoose_1 = require("mongoose");
 const enum_1 = require("../../common/enum");
 exports.BookSchema = new mongoose_1.default.Schema({
@@ -16,5 +16,5 @@ exports.BookSchema = new mongoose_1.default.Schema({
     timestamps: true,
     collection: enum_1.ENUM.COLLECTIONS.BOOK,
 });
-exports.BookModel = mongoose_1.default.model("Books", exports.BookSchema);
+exports.Book = mongoose_1.default.model("Book", exports.BookSchema);
 //# sourceMappingURL=books.schema.js.map
