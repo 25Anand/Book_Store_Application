@@ -13,7 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
       secret: 'BookStore',
       signOptions: { expiresIn: '2hr' },
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/hotel_management'),
+    MongooseModule.forRoot('mongodb://localhost:27017/Book_Store_Application'),
   ],
   controllers: [UsersController],
   providers: [UsersService],

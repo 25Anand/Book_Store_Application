@@ -8,8 +8,6 @@ import { EmailService } from '../nodeMailer/bulkMail';
 export class CronService {
   private lastNotificationTime: Date | null = null;
   constructor(private readonly emailService: EmailService) {}
-
-  
   @Cron(CronExpression.EVERY_MINUTE)
   async handleCron() {
     try {

@@ -12,13 +12,6 @@ export class BooksService {
     @InjectModel("Book")
     private readonly bookModel: Model<IBook>
   ) {}
-
-  /**
-   * 
-   * @param userData 
-   * @param createBookDto 
-   * @returns bookSaved
-   */
   async addBook(userData, createBookDto: CreateBookDto): Promise<any> {
     try {
       const bookTitle = slugify(createBookDto.title, { lower: true });
@@ -38,11 +31,6 @@ export class BooksService {
     }
   }
 
-  /**
-   * 
-   * @param bookId 
-   * @returns bookDetails
-   */
   async findBook(bookId: any): Promise<any> {
     try {
       const bookDetails = await this.bookModel.findOne({ bookId }).exec();

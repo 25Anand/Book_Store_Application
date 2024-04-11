@@ -39,6 +39,7 @@ export class MailService {
   }
 
   async sendmailtoauthor(authoremail: string, author: string, revenue: any) {
+    
     const mailOptions = {
       from: "bharatanand722@gmail.com",
       to: authoremail,

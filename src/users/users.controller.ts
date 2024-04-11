@@ -8,19 +8,13 @@ import { AuthGuard } from "src/guard/auth.guard";
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  /**
-   * 
-   * @param response 
-   * @param createUserDto 
-   * @returns give the sucess result if user register sucess
-   * @description This function will used to Signup the user
-   */
   @Post("signup")
   async signUp(@Res() response, @Body() createUserDto: CreateUserDto) {
     try {
       const userExists = await this.usersService.findUserByEmail(
         createUserDto.email
       );
+      console.log("user exist",userExists)
 
       if (userExists) {
         return response.status(HttpStatus.CONFLICT).json({
@@ -44,14 +38,6 @@ export class UsersController {
     }
   }
 
-  /**
-   * 
-   * @param response 
-   * @param loginOtpDto 
-   * @returns 
-   * @description The `@Post("login")` decorator indicates that the `login` method is a POST request handler for the
-  `/login` endpoint in the UsersController class.
-   */
   @Post("login")
   async login(@Res() response, @Body() loginOtpDto: LoginDto) {
     try{
@@ -91,14 +77,6 @@ export class UsersController {
     }
   }
 
-  /**
-   * 
-   * @param request 
-   * @param response 
-   * @returns Return the user profile data
-   * @description The code snippet you provided is a method in the UsersController class of a NestJS application.
-  Here's what it does
-   */
   @UseGuards(AuthGuard)
   @Get('profile')
   async getUser(@Req() request, @Res() response) {
@@ -107,23 +85,13 @@ export class UsersController {
       console.log(userData)
       const user = await this.usersService.getUser(userData);
       console.log(user)
-      if(!user){
-        return response.status(HttpStatus.OK).json({
-          message: LOGIN_MSG.NOT_EXIST,
-          User: user
-        });
-      }
       return response.status(HttpStatus.OK).json({
         message: RESPONSE_MSG.USER_DETAIL,
         NewUser: user
       });
     }
     catch(error){
-      return response.status(HttpStatus.BAD_REQUEST).json({
-        statusCode: HttpStatus.BAD_REQUEST,
-        message: LOGIN_MSG.NOT_EXIST,
-        error: error.message,
-      });
+      throw error;
     }
   }
 }

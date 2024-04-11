@@ -30,6 +30,7 @@ export class UsersService {
   async login(loginDto: LoginDto): Promise<any> {
     try {
       const userExists: any = await this.findUserByEmail(loginDto.email);
+      console.log("userExisgt",userExists)
 
       if (!userExists) {
         return LOGIN_MSG.NOT_EXIST;
@@ -58,6 +59,12 @@ export class UsersService {
         email: userExists.email,
         Token: userToken,
       };
+
+      // await this.redisService.setUserSession(
+      //   `UserSession: ${userExists.email}`,
+      //   JSON.stringify(userSessionData),
+      //   86400
+      // );
 
       return userToken;
     } catch (error) {

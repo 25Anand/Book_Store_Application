@@ -2,7 +2,6 @@
 
 import { Injectable } from '@nestjs/common';
 import { MailService } from './nodeMailer';
-
 @Injectable()
 export class EmailService {
   constructor(private readonly mailService: MailService) {}
